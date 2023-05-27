@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen,expect } from "../../tests/test-utils";
 import Users from "./Users";
 
 describe("Users", () => {
@@ -16,7 +16,7 @@ describe("Users", () => {
 
     // TODO used mock api response
 
-    // const userListItem = await screen.findAllByRole("listitem");
-    // expect(userListItem).toHaveLength(10);
+    const userListItem = await screen.findAllByRole("listitem");
+    expect(userListItem).toHaveLength(3);
   });
 });

@@ -1,5 +1,4 @@
-import { render, screen } from "@testing-library/react";
-import user from "@testing-library/user-event";
+import { render, screen, user, expect, vi } from "../../tests/test-utils";
 import LoginForm from "./LoginForm";
 
 const formData = {
@@ -7,7 +6,7 @@ const formData = {
   password: "12345",
 };
 
-// const handleSubmit = jest.fn();
+const handleSubmit = vi.fn();
 
 describe("Login", () => {
   test("renders correctly", () => {
@@ -17,33 +16,42 @@ describe("Login", () => {
     });
     expect(loginHeading).toBeInTheDocument();
 
-    const emailInputElement = screen.getByLabelText(/email/i);
+    const emailInputElement = getEmailElement();
     expect(emailInputElement).toBeInTheDocument();
 
-    const passwordInputElement = screen.getByLabelText(/password/i);
+    const passwordInputElement = getPasswordElement();
     expect(passwordInputElement).toBeInTheDocument();
 
-    const loginButton = screen.getByRole("button", {
-      name: "Login",
-    });
+    const loginButton = getSubmitButton();
 
     expect(loginButton).toBeInTheDocument();
   });
   test("submitting the form onSubmit with email and password", async () => {
     render(<LoginForm />);
 
-    const emailInputElement = screen.getByLabelText(/email/i);
+    const emailInputElement = getEmailElement();
     await user.type(emailInputElement, formData.email);
     expect(emailInputElement).toHaveValue(formData.email);
 
-    const passwordInputElement = screen.getByLabelText(/password/i);
+    const passwordInputElement = getPasswordElement();
     await user.type(passwordInputElement, formData.password);
     expect(passwordInputElement).toHaveValue(formData.password);
 
-    const loginButton = screen.getByRole("button", {
-      name: "Login",
-    });
-
+    const loginButton = getSubmitButton();
     await user.click(loginButton);
   });
 });
+
+function getEmailElement() {
+  return screen.getByLabelText(/email/i);
+}
+
+function getPasswordElement() {
+  return screen.getByLabelText(/password/i);
+}
+
+function getSubmitButton() {
+  return screen.getByRole("button", {
+    name: "Login",
+  });
+}

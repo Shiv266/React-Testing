@@ -1,5 +1,4 @@
-import { render, screen } from "@testing-library/react";
-import user from "@testing-library/user-event";
+import { render, screen, user, expect } from "../../tests/test-utils";
 import Counter from "./Counter";
 
 describe("Counter", () => {

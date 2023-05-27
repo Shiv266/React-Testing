@@ -1,6 +1,6 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, expect } from "../../tests/test-utils";
 import Skills from "./Skills";
-import { skills } from "../../App";
+import { skills } from "../Main";
 
 describe("Skills", () => {
   test("renders correctly", () => {

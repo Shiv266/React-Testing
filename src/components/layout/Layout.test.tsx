@@ -1,5 +1,4 @@
-import { render, screen } from "../../tests/test-utils";
-import user from "@testing-library/user-event";
+import { render, screen, user, expect } from "../../tests/test-utils";
 import Layout from "./Layout";
 
 describe("Layout", () => {
